@@ -14,7 +14,6 @@ interface SearchOverlayProps {
 }
 
 export default function SearchOverlay({ onClose }: SearchOverlayProps) {
-
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -24,7 +23,6 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
   const [fadeOut, setFadeOut] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-
 
   const imageBaseURL = "https://image.tmdb.org/t/p/w500";
 
@@ -92,10 +90,14 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
   };
 
   return (
-<div className={clsx(
-  "fixed top-0 left-0 w-full h-full bg-black/95 z-50 flex flex-col items-center px-4 py-24 overflow-y-auto transition-opacity duration-300",
-  fadeOut ? "opacity-0" : "opacity-100"
-)}>      <button
+    <div
+      className={clsx(
+        "fixed top-0 left-0 w-full h-full bg-black/95 z-50 flex flex-col items-center px-4 py-24 overflow-y-auto transition-opacity duration-300",
+        fadeOut ? "opacity-0" : "opacity-100"
+      )}
+    >
+      {" "}
+      <button
         onClick={() => {
           onClose();
           setSearchQuery("");
@@ -107,7 +109,6 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
       >
         <X />
       </button>
-
       <div
         ref={titleRef}
         className="text-secondary pt-4 text-2xl sm:text-3xl mb-6 font-bold"
@@ -142,10 +143,9 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-10 w-full max-w-screen-lg">
           {searchResults.map((result) => (
-  
             <div
-             key={result.id} 
-             onClick={() => handleCardClick(result.id)}
+              key={result.id}
+              onClick={() => handleCardClick(result.id)}
               className="bg-white/5 rounded-lg overflow-hidden shadow-md hover:scale-105 transition-all relative duration-300 cursor-pointer"
             >
               <div className="relative w-full h-[300px]">
@@ -170,7 +170,6 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
           ))}
         </div>
       )}
-
       {searchQuery.trim() !== "" && totalPages > 1 && (
         <div className="mt-6 flex gap-4 items-center text-white">
           <button
