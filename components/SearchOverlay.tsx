@@ -10,13 +10,21 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 interface SearchOverlayProps {
-  onClose: () => void;
+  onCloseAction: () => void;
 }
 
-export default function SearchOverlay({ onClose }: SearchOverlayProps) {
+interface SearchResult {
+  id: string;
+  poster_path: string;
+  title: string;
+  name: string;
+  media_type: string;
+}
+
+export default function SearchOverlay({ onCloseAction }: SearchOverlayProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
@@ -84,7 +92,7 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
   const handleCardClick = (id: string) => {
     setFadeOut(true);
     setTimeout(() => {
-      onClose();
+      onCloseAction();
       router.push(`/details/${id}`);
     }, 300);
   };
@@ -99,7 +107,7 @@ export default function SearchOverlay({ onClose }: SearchOverlayProps) {
       {" "}
       <button
         onClick={() => {
-          onClose();
+          onCloseAction();
           setSearchQuery("");
           setSearchResults([]);
           setPage(1);

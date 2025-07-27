@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Search, X } from "lucide-react";
 import clsx from "clsx";
-import axiosInstance from "@/lib/axios";
 import SearchOverlay from "./SearchOverlay";
 
 const navbarLinks = [
@@ -72,7 +71,7 @@ export default function Navbar() {
         </div>
       )}
       </nav>
-      {searchActive && <SearchOverlay onClose={() => setSearchActive(false)} /> }
+      {searchActive && <SearchOverlay onCloseAction={() => setSearchActive(false)} /> }
     </div>
   );
 }
